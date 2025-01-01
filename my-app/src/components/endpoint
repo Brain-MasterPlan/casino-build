@@ -1,0 +1,10 @@
+app.get('/api/player/:username/credits', async (req, res) => {
+    const { username } = req.params;
+    const player = await Player.findOne({ username });
+
+    if (!player) {
+        return res.status(404).json({ error: 'Player not found' });
+    }
+
+    res.json({ credits: player.credits });
+});
